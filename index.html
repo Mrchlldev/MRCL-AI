@@ -310,7 +310,7 @@
             >
                 <div
                     data-aos="zoom-in"
-                    class="neo-card floating bg-white px-8 py-4"
+                    class="neo-card floating bg-white px-6 py-2"
                 >
                     <p class="font-code text-lg font-bold">
                         whatsapp bot • ai assistant • automation
@@ -371,7 +371,7 @@
                     <!-- BODY -->
 
                     <div
-                        class="overflow-x-auto p-8 text-left font-code text-sm leading-8 text-green-300 md:text-base"
+                        class="overflow-x-auto p-5 text-left font-code text-sm leading-8 text-green-300 md:text-base"
                     >
 <pre>
 const MRCL_AI = {
@@ -844,14 +844,27 @@ console.log("Lorem ipsum dolor sit amet...")
         <script>
             AOS.init({
                 duration: 900,
-                once: true,
+                once: false,
             });
 
             function toggleSidebar() {
-                document
-                    .getElementById("sidebar")
-                    .classList.toggle("active");
-            }
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.getElementById("overlay");
+
+        sidebar.classList.toggle("active");
+
+        if (sidebar.classList.contains("active")) {
+            overlay.classList.remove(
+                "opacity-0",
+                "pointer-events-none"
+            );
+        } else {
+            overlay.classList.add(
+                "opacity-0",
+                "pointer-events-none"
+            );
+        }
+    }
         </script>
     </body>
 </html>
