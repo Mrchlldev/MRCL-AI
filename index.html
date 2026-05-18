@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+
+        <title>MRCL AI — Retro UI NeoBrutalism</title>
+
+        <!-- Tailwind -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;700&family=Source+Code+Pro:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- AOS -->
+        <link
+            href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+            rel="stylesheet"
+        />
+
+        <style>
+            :root {
+                --bg: #fff4d6;
+                --yellow: #ffd84d;
+                --orange: #ff934f;
+                --red: #ff5f5f;
+                --blue: #5b8cff;
+                --green: #5fd38d;
+                --black: #111111;
+                --white: #ffffff;
+            }
+
+            * {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: "Space Grotesk", sans-serif;
+                background: var(--bg);
+                color: var(--black);
+                overflow-x: hidden;
+            }
+
+            .font-title {
+                font-family: "Archivo Black", sans-serif;
+            }
+
+            .font-code {
+                font-family: "Source Code Pro", monospace;
+            }
+
+            .neo-card {
+                border: 4px solid var(--black);
+                border-radius: 28px;
+                box-shadow: 10px 10px 0px var(--black);
+                transition: 0.18s ease;
+            }
+
+            .neo-card:hover {
+                transform: translate(-4px, -4px);
+                box-shadow: 16px 16px 0px var(--black);
+            }
+
+            .press-effect {
+                transition: 0.14s ease;
+            }
+
+            .press-effect:active {
+                transform: scale(0.96) rotate(-1deg);
+            }
+
+            .sidebar {
+                transform: translateX(100%);
+                transition: 0.35s ease;
+            }
+
+            .sidebar.active {
+                transform: translateX(0%);
+            }
+
+            .pricing-scroll::-webkit-scrollbar {
+                height: 12px;
+            }
+
+            .pricing-scroll::-webkit-scrollbar-thumb {
+                background: black;
+                border-radius: 999px;
+            }
+
+            .gradient-grid {
+                background-image:
+                    linear-gradient(
+                        rgba(0, 0, 0, 0.07) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        90deg,
+                        rgba(0, 0, 0, 0.07) 1px,
+                        transparent 1px
+                    );
+                background-size: 32px 32px;
+            }
+
+            .floating {
+                animation: floating 4s ease-in-out infinite;
+            }
+
+            @keyframes floating {
+                0% {
+                    transform: translateY(0px);
+                }
+                50% {
+                    transform: translateY(-12px);
+                }
+                100% {
+                    transform: translateY(0px);
+                }
+            }
+
+            .glow {
+                position: absolute;
+                border-radius: 999px;
+                filter: blur(60px);
+                opacity: 0.4;
+                z-index: -1;
+            }
+        </style>
+    </head>
+
+    <body class="gradient-grid">
+        <!-- SIDEBAR -->
+
+        <aside
+            id="sidebar"
+            class="sidebar fixed right-0 top-0 z-[999] h-screen w-[320px] border-l-4 border-black bg-white p-6"
+        >
+            <div class="flex items-center justify-between">
+                <h2 class="font-title text-2xl">MRCL AI</h2>
+
+                <button
+                    onclick="toggleSidebar()"
+                    class="press-effect neo-card flex h-12 w-12 items-center justify-center bg-red-400"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <div class="mt-10 space-y-5">
+                <a
+                    href="#about"
+                    class="press-effect neo-card flex items-center gap-4 bg-yellow-300 p-4"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01"
+                        />
+                    </svg>
+
+                    <span class="font-bold">About</span>
+                </a>
+
+                <a
+                    href="#feature"
+                    class="press-effect neo-card flex items-center gap-4 bg-green-300 p-4"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9.75 3v2.25M14.25 3v2.25M3 9.75h18M4.5 6.75h15A1.5 1.5 0 0121 8.25v10.5A1.5 1.5 0 0119.5 20.25h-15A1.5 1.5 0 013 18.75V8.25A1.5 1.5 0 014.5 6.75z"
+                        />
+                    </svg>
+
+                    <span class="font-bold">Feature</span>
+                </a>
+
+                <a
+                    href="#pricing"
+                    class="press-effect neo-card flex items-center gap-4 bg-blue-300 p-4"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8c-1.657 0-3 1.119-3 2.5S10.343 13 12 13s3 1.119 3 2.5S13.657 18 12 18m0-10v10"
+                        />
+                    </svg>
+
+                    <span class="font-bold">Pricing</span>
+                </a>
+
+                <a
+                    href="#get-started"
+                    class="press-effect neo-card flex items-center gap-4 bg-orange-300 p-4"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                        />
+                    </svg>
+
+                    <span class="font-bold">Get Started</span>
+                </a>
+            </div>
+
+            <hr class="my-8 border-2 border-black" />
+
+            <div class="neo-card bg-black p-5 text-white">
+                <div class="flex items-center gap-4">
+                    <img
+                        src="https://i.pravatar.cc/100"
+                        class="h-14 w-14 rounded-full border-4 border-white"
+                    />
+
+                    <div>
+                        <h3 class="font-title text-lg">Marcellino</h3>
+                        <p class="text-sm opacity-80">
+                            Creator of MRCL AI
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- NAVBAR -->
+
+        <nav
+            class="fixed left-0 top-0 z-50 w-full px-6 py-5 backdrop-blur-md"
+        >
+            <div
+                class="mx-auto flex max-w-7xl items-center justify-between rounded-[24px] border-4 border-black bg-yellow-300 px-6 py-4 shadow-[8px_8px_0px_#111]"
+            >
+                <h1 class="font-title text-2xl md:text-3xl">
+                    MRCL AI
+                </h1>
+
+                <button
+                    onclick="toggleSidebar()"
+                    class="press-effect neo-card flex h-14 w-14 flex-col items-center justify-center gap-1 bg-white"
+                >
+                    <span class="h-1 w-7 rounded-full bg-black"></span>
+                    <span class="h-1 w-7 rounded-full bg-black"></span>
+                    <span class="h-1 w-7 rounded-full bg-black"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- HERO -->
+
+        <section
+            class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pb-24 pt-40"
+        >
+            <div
+                class="glow left-[-100px] top-[120px] h-[240px] w-[240px] bg-pink-400"
+            ></div>
+
+            <div
+                class="glow bottom-[100px] right-[20px] h-[300px] w-[300px] bg-yellow-400"
+            ></div>
+
+            <div
+                class="mx-auto flex max-w-5xl flex-col items-center text-center"
+            >
+                <div
+                    data-aos="zoom-in"
+                    class="neo-card floating bg-white px-8 py-4"
+                >
+                    <p class="font-code text-lg font-bold">
+                        whatsapp bot • ai assistant • automation
+                    </p>
+                </div>
+
+                <h1
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                    class="font-title mt-10 text-6xl leading-none md:text-8xl"
+                >
+                    MRCL AI
+                </h1>
+
+                <p
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                    class="mt-8 max-w-2xl text-lg font-medium md:text-2xl"
+                >
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Molestias doloremque aliquam blanditiis nihil similique
+                    porro.
+                </p>
+
+                <!-- CODE SNAP -->
+
+                <div
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                    class="neo-card mt-12 w-full max-w-4xl overflow-hidden bg-black"
+                >
+                    <!-- HEADER -->
+
+                    <div
+                        class="flex items-center gap-4 border-b-4 border-white bg-[#1c1c1c] px-6 py-4"
+                    >
+                        <div class="flex gap-2">
+                            <div
+                                class="h-4 w-4 rounded-full bg-red-400"
+                            ></div>
+
+                            <div
+                                class="h-4 w-4 rounded-full bg-yellow-400"
+                            ></div>
+
+                            <div
+                                class="h-4 w-4 rounded-full bg-green-400"
+                            ></div>
+                        </div>
+
+                        <div
+                            class="rounded-full border-2 border-white px-4 py-1 font-code text-sm text-white"
+                        >
+                            mrcl-ai.js
+                        </div>
+                    </div>
+
+                    <!-- BODY -->
+
+                    <div
+                        class="overflow-x-auto p-8 text-left font-code text-sm leading-8 text-green-300 md:text-base"
+                    >
+<pre>
+const MRCL_AI = {
+    platform: "WhatsApp Bot",
+    style: "Retro NeoBrutalism",
+    feature: [
+        "AI Assistant",
+        "Downloader",
+        "Search Engine",
+        "Automation"
+    ],
+    status: "ONLINE"
+}
+
+console.log("Lorem ipsum dolor sit amet...")
+</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+
+        <section
+            id="about"
+            class="px-6 py-28"
+        >
+            <div class="mx-auto max-w-7xl">
+                <div
+                    data-aos="fade-right"
+                    class="neo-card inline-block bg-orange-300 px-8 py-4"
+                >
+                    <h2 class="font-title text-4xl">ABOUT</h2>
+                </div>
+
+                <div class="mt-14 grid gap-10 md:grid-cols-2">
+                    <div
+                        data-aos="fade-up"
+                        class="neo-card bg-white p-8"
+                    >
+                        <h3 class="font-title text-3xl">
+                            Modern WhatsApp Bot
+                        </h3>
+
+                        <p class="mt-6 text-lg leading-relaxed">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Natus, repellat. Dolore cumque reiciendis
+                            ipsum.
+                        </p>
+                    </div>
+
+                    <div
+                        data-aos="fade-up"
+                        data-aos-delay="150"
+                        class="neo-card bg-yellow-300 p-8"
+                    >
+                        <h3 class="font-title text-3xl">
+                            Fast & Flexible
+                        </h3>
+
+                        <p class="mt-6 text-lg leading-relaxed">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Pariatur repudiandae reprehenderit sint
+                            assumenda molestias.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURE -->
+
+        <section
+            id="feature"
+            class="px-6 py-28"
+        >
+            <div class="mx-auto max-w-7xl">
+                <div
+                    data-aos="fade-right"
+                    class="neo-card inline-block bg-green-300 px-8 py-4"
+                >
+                    <h2 class="font-title text-4xl">FEATURE</h2>
+                </div>
+
+                <div class="mt-16 grid gap-8 md:grid-cols-2">
+                    <!-- CARD -->
+
+                    <div
+                        data-aos="zoom-in"
+                        class="neo-card relative bg-white p-8"
+                    >
+                        <div
+                            class="absolute right-6 top-6 rounded-2xl border-4 border-black bg-yellow-300 p-4"
+                        >
+                            ⚡
+                        </div>
+
+                        <h3 class="font-title text-3xl">
+                            AI Assistant
+                        </h3>
+
+                        <p class="mt-5 max-w-md text-lg">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                        </p>
+                    </div>
+
+                    <div
+                        data-aos="zoom-in"
+                        data-aos-delay="100"
+                        class="neo-card relative bg-blue-300 p-8"
+                    >
+                        <div
+                            class="absolute right-6 top-6 rounded-2xl border-4 border-black bg-white p-4"
+                        >
+                            📥
+                        </div>
+
+                        <h3 class="font-title text-3xl">
+                            Downloader
+                        </h3>
+
+                        <p class="mt-5 max-w-md text-lg">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                        </p>
+                    </div>
+
+                    <div
+                        data-aos="zoom-in"
+                        data-aos-delay="200"
+                        class="neo-card relative bg-red-300 p-8"
+                    >
+                        <div
+                            class="absolute right-6 top-6 rounded-2xl border-4 border-black bg-white p-4"
+                        >
+                            🔎
+                        </div>
+
+                        <h3 class="font-title text-3xl">
+                            Smart Search
+                        </h3>
+
+                        <p class="mt-5 max-w-md text-lg">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                        </p>
+                    </div>
+
+                    <div
+                        data-aos="zoom-in"
+                        data-aos-delay="300"
+                        class="neo-card relative bg-yellow-300 p-8"
+                    >
+                        <div
+                            class="absolute right-6 top-6 rounded-2xl border-4 border-black bg-white p-4"
+                        >
+                            🤖
+                        </div>
+
+                        <h3 class="font-title text-3xl">
+                            Automation
+                        </h3>
+
+                        <p class="mt-5 max-w-md text-lg">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+
+        <section
+            id="pricing"
+            class="px-6 py-28"
+        >
+            <div class="mx-auto max-w-7xl">
+                <div
+                    data-aos="fade-right"
+                    class="neo-card inline-block bg-blue-300 px-8 py-4"
+                >
+                    <h2 class="font-title text-4xl">PRICING</h2>
+                </div>
+
+                <!-- TYPE 1 -->
+
+                <div class="mt-16">
+                    <h3 class="font-title text-3xl">
+                        Sewa Bot
+                    </h3>
+
+                    <div
+                        class="pricing-scroll mt-8 flex gap-8 overflow-x-auto pb-6"
+                    >
+                        <!-- CARD -->
+
+                        <div
+                            class="neo-card min-w-[320px] bg-white p-8"
+                        >
+                            <h4 class="font-title text-3xl">
+                                Basic
+                            </h4>
+
+                            <div
+                                class="neo-card mt-6 inline-block bg-yellow-300 px-6 py-3"
+                            >
+                                <span class="font-title text-3xl">
+                                    Rp10K
+                                </span>
+                            </div>
+
+                            <ul class="mt-8 space-y-4 text-lg">
+                                <li>• 1 Group</li>
+                                <li>• AI Feature</li>
+                                <li>• Downloader</li>
+                            </ul>
+                        </div>
+
+                        <div
+                            class="neo-card min-w-[320px] bg-green-300 p-8"
+                        >
+                            <h4 class="font-title text-3xl">
+                                Standard
+                            </h4>
+
+                            <div
+                                class="neo-card mt-6 inline-block bg-white px-6 py-3"
+                            >
+                                <span class="font-title text-3xl">
+                                    Rp25K
+                                </span>
+                            </div>
+
+                            <ul class="mt-8 space-y-4 text-lg">
+                                <li>• Unlimited Group</li>
+                                <li>• Premium AI</li>
+                                <li>• Priority Access</li>
+                            </ul>
+                        </div>
+
+                        <div
+                            class="neo-card min-w-[320px] bg-red-300 p-8"
+                        >
+                            <h4 class="font-title text-3xl">
+                                Ultimate
+                            </h4>
+
+                            <div
+                                class="neo-card mt-6 inline-block bg-white px-6 py-3"
+                            >
+                                <span class="font-title text-3xl">
+                                    Rp50K
+                                </span>
+                            </div>
+
+                            <ul class="mt-8 space-y-4 text-lg">
+                                <li>• Full Access</li>
+                                <li>• Unlimited Use</li>
+                                <li>• VIP Support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TYPE 2 -->
+
+                <div class="mt-24">
+                    <h3 class="font-title text-3xl">
+                        Akses Premium
+                    </h3>
+
+                    <div
+                        class="pricing-scroll mt-8 flex gap-8 overflow-x-auto pb-6"
+                    >
+                        <div
+                            class="neo-card min-w-[320px] bg-white p-8"
+                        >
+                            <h4 class="font-title text-3xl">
+                                Bronze
+                            </h4>
+
+                            <div
+                                class="neo-card mt-6 inline-block bg-orange-300 px-6 py-3"
+                            >
+                                <span class="font-title text-3xl">
+                                    Rp15K
+                                </span>
+                            </div>
+
+                            <ul class="mt-8 space-y-4 text-lg">
+                                <li>• Basic AI</li>
+                                <li>• Fast Response</li>
+                                <li>• Search Feature</li>
+                            </ul>
+                        </div>
+
+                        <div
+                            class="neo-card min-w-[320px] bg-yellow-300 p-8"
+                        >
+                            <h4 class="font-title text-3xl">
+                                Silver
+                            </h4>
+
+                            <div
+                                class="neo-card mt-6 inline-block bg-white px-6 py-3"
+                            >
+                                <span class="font-title text-3xl">
+                                    Rp30K
+                                </span>
+                            </div>
+
+                            <ul class="mt-8 space-y-4 text-lg">
+                                <li>• Unlimited Prompt</li>
+                                <li>• AI Generation</li>
+                                <li>• Media Feature</li>
+                            </ul>
+                        </div>
+
+                        <div
+                            class="neo-card min-w-[320px] bg-blue-300 p-8"
+                        >
+                            <h4 class="font-title text-3xl">
+                                Gold
+                            </h4>
+
+                            <div
+                                class="neo-card mt-6 inline-block bg-white px-6 py-3"
+                            >
+                                <span class="font-title text-3xl">
+                                    Rp75K
+                                </span>
+                            </div>
+
+                            <ul class="mt-8 space-y-4 text-lg">
+                                <li>• All Premium Feature</li>
+                                <li>• Unlimited Access</li>
+                                <li>• VIP Support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GET STARTED -->
+
+        <section
+            id="get-started"
+            class="px-6 py-28"
+        >
+            <div class="mx-auto max-w-7xl">
+                <div
+                    data-aos="fade-right"
+                    class="neo-card inline-block bg-red-300 px-8 py-4"
+                >
+                    <h2 class="font-title text-4xl">
+                        GET STARTED
+                    </h2>
+                </div>
+
+                <div class="mt-16 grid gap-10 md:grid-cols-2">
+                    <!-- WHATSAPP -->
+
+                    <div
+                        data-aos="flip-left"
+                        class="neo-card bg-green-300 p-8"
+                    >
+                        <div
+                            class="flex items-center justify-between"
+                        >
+                            <div>
+                                <h3 class="font-title text-4xl">
+                                    WhatsApp
+                                </h3>
+
+                                <p class="mt-4 text-lg">
+                                    +62 812-3456-7890
+                                </p>
+                            </div>
+
+                            <div
+                                class="rounded-3xl border-4 border-black bg-white p-5 text-4xl"
+                            >
+                                💬
+                            </div>
+                        </div>
+
+                        <button
+                            class="press-effect neo-card mt-10 w-full bg-white px-6 py-4 text-xl font-bold"
+                        >
+                            Use Bot
+                        </button>
+                    </div>
+
+                    <!-- TELEGRAM -->
+
+                    <div
+                        data-aos="flip-right"
+                        class="neo-card bg-blue-300 p-8"
+                    >
+                        <div
+                            class="flex items-center justify-between"
+                        >
+                            <div>
+                                <h3 class="font-title text-4xl">
+                                    Telegram
+                                </h3>
+
+                                <p class="mt-4 text-lg">
+                                    @mrcl_ai_bot
+                                </p>
+                            </div>
+
+                            <div
+                                class="rounded-3xl border-4 border-black bg-white p-5 text-4xl"
+                            >
+                                ✈️
+                            </div>
+                        </div>
+
+                        <button
+                            class="press-effect neo-card mt-10 w-full bg-white px-6 py-4 text-xl font-bold"
+                        >
+                            Use Bot
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+
+        <footer class="px-6 pb-14 pt-20">
+            <div
+                class="mx-auto flex max-w-7xl flex-col gap-8 rounded-[32px] border-4 border-black bg-black px-8 py-10 text-white md:flex-row md:items-center md:justify-between"
+            >
+                <div>
+                    <h2 class="font-title text-4xl">
+                        MRCL AI
+                    </h2>
+
+                    <p class="mt-3 text-lg opacity-80">
+                        Retro UI NeoBrutalism WhatsApp Bot Portfolio
+                    </p>
+                </div>
+
+                <div class="flex gap-4">
+                    <button
+                        class="press-effect neo-card bg-yellow-300 px-6 py-3 font-bold text-black"
+                    >
+                        WhatsApp
+                    </button>
+
+                    <button
+                        class="press-effect neo-card bg-blue-300 px-6 py-3 font-bold text-black"
+                    >
+                        Telegram
+                    </button>
+                </div>
+            </div>
+        </footer>
+
+        <!-- SCRIPT -->
+
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+        <script>
+            AOS.init({
+                duration: 900,
+                once: true,
+            });
+
+            function toggleSidebar() {
+                document
+                    .getElementById("sidebar")
+                    .classList.toggle("active");
+            }
+        </script>
+    </body>
+</html>
