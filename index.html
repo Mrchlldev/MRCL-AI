@@ -79,9 +79,10 @@
             }
 
             .sidebar {
-                transform: translateX(100%);
-                transition: 0.35s ease;
-            }
+    transform: translateX(100%);
+    transition: 0.35s ease;
+    box-shadow: -10px 0px 0px #111;
+}
 
             .sidebar.active {
                 transform: translateX(0%);
@@ -137,6 +138,13 @@
     </head>
 
     <body class="gradient-grid">
+        <!-- OVERLAY -->
+
+<div
+    id="overlay"
+    onclick="toggleSidebar()"
+    class="pointer-events-none fixed inset-0 z-[900] bg-black/30 opacity-0 backdrop-blur-md transition-all duration-300"
+></div>
         <!-- SIDEBAR -->
 
         <aside
@@ -266,18 +274,16 @@
         <!-- NAVBAR -->
 
         <nav
-            class="fixed left-0 top-0 z-50 w-full px-6 py-5 backdrop-blur-md"
+            class="fixed left-0 top-0 z-50 w-full px-6 py-3"
         >
-            <div
-                class="mx-auto flex max-w-7xl items-center justify-between rounded-[24px] border-4 border-black bg-yellow-300 px-6 py-4 shadow-[8px_8px_0px_#111]"
-            >
+            <div class="mx-auto flex max-w-6xl items-center justify-between rounded-[20px] border-4 border-black bg-yellow-300 px-5 py-3 shadow-[6px_6px_0px_#111]">
                 <h1 class="font-title text-2xl md:text-3xl">
                     MRCL AI
                 </h1>
 
                 <button
                     onclick="toggleSidebar()"
-                    class="press-effect neo-card flex h-14 w-14 flex-col items-center justify-center gap-1 bg-white"
+                    class="press-effect neo-card flex h-12 w-12 flex-col items-center justify-center gap-1 bg-white"
                 >
                     <span class="h-1 w-7 rounded-full bg-black"></span>
                     <span class="h-1 w-7 rounded-full bg-black"></span>
@@ -334,7 +340,7 @@
                 <div
                     data-aos="fade-up"
                     data-aos-delay="300"
-                    class="neo-card mt-12 w-full max-w-4xl overflow-hidden bg-black"
+                    class="neo-card mt-12 w-full max-w-2xl overflow-hidden bg-black"
                 >
                     <!-- HEADER -->
 
