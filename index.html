@@ -108,6 +108,47 @@
                     );
                 background-size: 32px 32px;
             }
+            .bg-grid {
+    background-image:
+        linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px);
+
+    background-size: 32px 32px;
+}
+
+.bg-dots {
+    background-image: radial-gradient(
+        rgba(0,0,0,0.15) 2px,
+        transparent 2px
+    );
+
+    background-size: 28px 28px;
+}
+
+.bg-diagonal {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(0,0,0,0.06),
+        rgba(0,0,0,0.06) 8px,
+        transparent 8px,
+        transparent 24px
+    );
+}
+
+.bg-checker {
+    background-image:
+        linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0,0,0,0.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.05) 75%);
+
+    background-size: 40px 40px;
+    background-position:
+        0 0,
+        0 20px,
+        20px -20px,
+        -20px 0px;
+}
 
             .floating {
                 animation: floating 4s ease-in-out infinite;
@@ -132,6 +173,64 @@
                 opacity: 0.4;
                 z-index: -1;
             }
+            .particle-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    border: 3px solid #111;
+    opacity: 0.15;
+    animation:
+        floatRotate linear infinite,
+        fadeInOut ease-in-out infinite;
+}
+
+.particle.square {
+    border-radius: 6px;
+}
+
+.particle.circle {
+    border-radius: 999px;
+}
+
+@keyframes floatRotate {
+    0% {
+        transform:
+            translateY(0px)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-30px)
+            rotate(180deg);
+    }
+
+    100% {
+        transform:
+            translateY(0px)
+            rotate(360deg);
+    }
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0.08;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 0.08;
+    }
+}
         </style>
     </head>
 
@@ -297,7 +396,7 @@
         <!-- HERO -->
 
         <section
-            class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pb-24 pt-40"
+            class="bg-gride relative flex min-h-screen items-center justify-center overflow-hidden px-6 pb-24 pt-40"
         >
             <div
                 class="glow left-[-100px] top-[120px] h-[240px] w-[240px] bg-pink-400"
@@ -399,7 +498,7 @@ console.log("Lorem ipsum dolor sit amet...")
 
         <section
             id="about"
-            class="px-6 py-28"
+            class="bg-white px-6 py-28"
         >
             <div class="mx-auto max-w-7xl">
                 <div
@@ -448,7 +547,7 @@ console.log("Lorem ipsum dolor sit amet...")
 
         <section
             id="feature"
-            class="px-6 py-28"
+            class="bg-diagonal px-6 py-28"
         >
             <div class="mx-auto max-w-7xl">
                 <div
@@ -551,7 +650,7 @@ console.log("Lorem ipsum dolor sit amet...")
 
         <section
             id="pricing"
-            class="px-6 py-28"
+            class="bg-dots px-6 py-28"
         >
             <div class="mx-auto max-w-7xl">
                 <div
@@ -725,7 +824,7 @@ console.log("Lorem ipsum dolor sit amet...")
 
         <section
             id="get-started"
-            class="px-6 py-28"
+            class="bg-checker px-6 py-28"
         >
             <div class="mx-auto max-w-7xl">
                 <div
